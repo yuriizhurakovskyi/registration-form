@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+<style>
+*{
+	color: #254e77;
+	font-family: 'Open Sans', sans-serif;
+}
+.container{
+	width: 400px;
+	text-align: center;
+}
+.sendButton {
+	line-height: 1.5;
+	border-radius: 5px;
+	margin: 15px;
+	padding: 8px 40px;
+	border: none;
+	cursor: pointer;
+	font-size: 18px;
+	color: white;
+	background: #254e77;
+	font-weight: bold;
+}
+
+.sendButton:focus {
+	outline: none
+}
+
+.sendButton:hover{
+  box-shadow: 0 0 10px rgba(37,78,119,0.5);
+}
+
+.sendButton:active {
+  transform: translateY(3px);
+}
+
+
+.dataField {
+	height: 15px;
+	width: 200px;
+	border-radius: 4px;
+	border: 1px solid lightblue;
+	background: white;
+	padding: 11px 12px;
+	border-radius: 4px;
+	margin: 10px 5px;
+	font-size: 16px
+}
+
+.dataField:focus {
+	outline: none
+}
+
+label {
+	font-size: 22px;
+	display:inline-block;
+	width: 200px;
+	margin: 10px 5px;
+}
+
+.dataField:hover {
+	border-color: lightblue;
+	box-shadow: 0 0 4px lightblue;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Registration Form(GET)</h1>
+
+		<form action="">
+			<label>Lastname</label><input type="text" id="userLastNameGet" class="dataField">
+			<label>Firstname</label><input type="text" id="userFirstNameGet" class="dataField">
+			<label>Age</label><input type="text" id="userAgeGet" class="dataField">
+			<label>Address</label> <input type="text" id="userAddressGet" class="dataField"><br>
+			<input type="button" id="sendButton1" class="sendButton" value="Send">
+		</form>
+	</div>
+	<div class="container">
+		<h1>Registration Form(POST)</h1>
+
+		<form action="">
+			<label>Lastname</label><input type="text" id="userLastNamePost" class="dataField">
+			<label>Firstname</label><input type="text" id="userFirstNamePost" class="dataField">
+			<label>Age</label><input type="text" id="userAgePost" class="dataField">
+			<label>Address</label> <input type="text" id="userAddressPost" class="dataField"><br>
+			<input type="button" id="sendButton2" class="sendButton" value="Send">
+		</form>
+	</div>
+	<script>
+	sendButton1.onclick = () => validateFormByAge(userAgeGet)? sendDataByGetMethod() : incorrectData(userAgeGet);
+	sendButton2.onclick = () => validateFormByAge(userAgePost)? sendDataByPostMethod() : incorrectData(userAgePost);
+	function validateFormByAge(ageId){
+		if(ageId.value >= 1 && ageId.value <= 100){
+			ageId.style.border = "1px solid lightblue";
+			ageId.style.color = "#254e77";
+			return true;
+		}
+		return false;
+	}
+	function incorrectData(elem){
+		elem.style.border = "1px solid red";
+		elem.focus();
+		elem.value="Incorrect!";
+		elem.style.color = "red";
+	}
+	
+	function sendDataByGetMethod() {
+		var userData = {
+				lName:	document.getElementById('userLastNameGet').value,
+				fName:	document.getElementById('userFirstNameGet').value,
+				age: document.getElementById('userAgeGet').value,
+				address: document.getElementById('userAddressGet').value
+		};
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "/formGet?lName=" + userData.lName + "&fName=" + userData.fName + "&age=" + userData.age 
+				+ "&address=" + userData.address);
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.send();
+	}
+	
+	function sendDataByPostMethod() {
+		var userData = {
+				lName:	document.getElementById('userLastNamePost').value,
+				fName:	document.getElementById('userFirstNamePost').value,
+				age: document.getElementById('userAgePost').value,
+				address: document.getElementById('userAddressPost').value
+		};
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "/formPost");
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.send(JSON.stringify(userData));
+	}
+	</script>
+</body>
+</html>
