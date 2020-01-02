@@ -8,13 +8,13 @@ server.use(jsonParser);
 server.use(express.static(__dirname));
 
 server.get("/", function (req, resp) {
-    console.log("Start page requested.");
+    console.log("\nStart page requested.\n");
     resp.send('<h1>Welcome!</h1>' + '<a href="http://localhost:3000/registration-form.html"' +
         ' style="text-decoration: none; font-size: 30px; color: #254e77"> 👉 Registration Form</a>');
 });
 
 server.get("/formGet", function (req, resp) {
-    console.log("Form receipted by GET.");
+    console.log("\nForm receipted by GET.\n");
     var obj = req.query;
     console.log(obj.lName += ".ValidatedByGET");
     console.log(obj.fName += ".ValidatedByGET");
@@ -24,7 +24,7 @@ server.get("/formGet", function (req, resp) {
 });
 
 server.post("/formPost", function (req, resp) {
-    console.log("Form receipted by POST.");
+    console.log("\nForm receipted by POST.\n");
     var obj = req.body;
     console.log(obj.lName += ".ValidatedByPOST");
     console.log(obj.fName += ".ValidatedByPOST");
