@@ -23,7 +23,6 @@ server.get("/formGet", function (req, resp) {
 
 server.post("/formPost", function (req, resp) {
     console.log("Form receipted by POST.");
-    // console.log(JSON.parse(req.query));
     var obj = req.body;
     console.log(obj.lName += ".ValidatedByPOST");
     console.log(obj.fName += ".ValidatedByPOST");
@@ -32,4 +31,4 @@ server.post("/formPost", function (req, resp) {
     resp.send(obj);
 });
 
-server.listen(3000); //the server object listens on port 8080
+server.listen(3000);
