@@ -9,6 +9,8 @@ server.use(express.static(__dirname));
 
 server.get("/", function (req, resp) {
     console.log("Start page requested.");
+    resp.send('<h1>Welcome!</h1>' + '<a href="http://localhost:3000/registration-form.html"' +
+        ' style="text-decoration: none; font-size: 30px; color: #254e77"> 👉 Registration Form</a>');
 });
 
 server.get("/formGet", function (req, resp) {
